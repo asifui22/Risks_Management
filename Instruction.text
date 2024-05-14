@@ -1,0 +1,37 @@
+Solution
+
+Create Repository in GIT.
+
+For git, simply type "git" and a list of git commands will be filtered. Git clone is one of the commands,
+
+Please follow the below GIT Commands.
+
+Initialization of GIT
+git init
+​git config --global user.email "your@example.com"
+git config --global user.name "Your Name"
+
+​git config --global user.email asif@ncs-us.org
+
+Set Remote Origin URL
+git remote add origin https://github.com/user.name/RepoName.git
+
+If already exist then use below command
+
+git remote set-url origin https://github.com/user.name/RepoName.git
+
+
+Staging the Changes of Project
+git add .
+
+
+ Commit your changes
+git commit -m "GIT Comment"
+
+
+ Push your changes into GIT
+git push origin master
+
+
+Pull your latest changes from GIT
+git pull origin master
