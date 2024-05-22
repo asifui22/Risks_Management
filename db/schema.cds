@@ -1,5 +1,6 @@
-namespace myNamespace;
-using { sap.common.CodeList } from '@sap/cds/common';
+namespace db.risks;
+
+using {sap.common.CodeList} from '@sap/cds/common';
 
 entity Risks {
   key ID                      : UUID;
@@ -24,9 +25,10 @@ entity Mitigation {
 
 }
 
-entity Priority: CodeList {
-  key code    : UUID;
-      name  : String;
-      risks : Association to many Risks
-                on risks.priority = $self;
+entity Priority : CodeList {
+  key code : String enum {
+        H = 'High';
+        M = 'Medium';
+        L = 'Low';
+      };
 }

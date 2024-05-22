@@ -1,12 +1,15 @@
-using { myNamespace } from '../db/schema.cds';
+namespace srv.risks;
 
-@path: '/service/myNamespace'
+
+using {db.risks as db} from '../db/schema.cds';
+
+@path    : '/RiskService'
 @requires: 'authenticated-user'
-service myNamespaceSrv {
+service RiskService {
   @odata.draft.enabled
-  entity Risks as projection on myNamespace.Risks;
+  entity Risks      as projection on db.Risks;
+
   @odata.draft.enabled
-  entity Mitigation as projection on myNamespace.Mitigation;
-  @odata.draft.enabled
-  entity Priority as projection on myNamespace.Priority;
+  entity Mitigation as projection on db.Mitigation;
+
 }

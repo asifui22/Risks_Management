@@ -1,14 +1,14 @@
-using { myNamespaceSrv } from '../srv/service.cds';
+using { srv.risks.RiskService as service } from '../srv/service.cds';
 
-annotate myNamespaceSrv.Risks with @UI.HeaderInfo: { TypeName: 'Risk', TypeNamePlural: 'Risks' };
-annotate myNamespaceSrv.Risks with {
+annotate service.Risks with @UI.HeaderInfo: { TypeName: 'Risk', TypeNamePlural: 'Risks' };
+annotate service.Risks with {
   priority @Common.ValueList: {
     CollectionPath: 'Priority',
     Parameters    : [
       {
         $Type            : 'Common.ValueListParameterInOut',
-        LocalDataProperty: priority_ID, 
-        ValueListProperty: 'ID'
+        LocalDataProperty: priority_code, 
+        ValueListProperty: 'code'
       },
       {
         $Type            : 'Common.ValueListParameterDisplayOnly',
@@ -17,7 +17,7 @@ annotate myNamespaceSrv.Risks with {
     ],
   }
 };
-annotate myNamespaceSrv.Risks with {
+annotate service.Risks with {
   mitigation @Common.ValueList: {
     CollectionPath: 'Mitigation',
     Parameters    : [
@@ -33,106 +33,106 @@ annotate myNamespaceSrv.Risks with {
     ],
   }
 };
-annotate myNamespaceSrv.Risks with @UI.DataPoint #title: {
+annotate service.Risks with @UI.DataPoint #title: {
   Value: title,
   Title: 'Title',
 };
-annotate myNamespaceSrv.Risks with {
+annotate service.Risks with {
   title @title: 'Title';
   owner @title: 'Owner';
   description @title: 'Description';
   impact @title: 'Impact'
 };
 
-annotate myNamespaceSrv.Risks with @UI.LineItem: [
+annotate service.Risks with @UI.LineItem: [
     { $Type: 'UI.DataField', Value: title },
     { $Type: 'UI.DataField', Value: owner },
     { $Type: 'UI.DataField', Value: description },
     { $Type: 'UI.DataField', Value: impact },
-    { $Type: 'UI.DataField', Label: 'Priority', Value: priority_ID },
+    { $Type: 'UI.DataField', Label: 'Priority', Value: priority_code },
     { $Type: 'UI.DataField', Label: 'Mitigation', Value: mitigation_ID }
 ];
 
-annotate myNamespaceSrv.Risks with @UI.FieldGroup #Main: {
+annotate service.Risks with @UI.FieldGroup #Main: {
   $Type: 'UI.FieldGroupType', Data: [
     { $Type: 'UI.DataField', Value: title },
     { $Type: 'UI.DataField', Value: owner },
     { $Type: 'UI.DataField', Value: description },
     { $Type: 'UI.DataField', Value: impact },
-    { $Type: 'UI.DataField', Label: 'Priority', Value: priority_ID },
+    { $Type: 'UI.DataField', Label: 'Priority', Value: priority_code },
     { $Type: 'UI.DataField', Label: 'Mitigation', Value: mitigation_ID }
   ]
 };
 
-annotate myNamespaceSrv.Risks with {
+annotate service.Risks with {
   priority @Common.Label: 'Priority';
   mitigation @Common.Label: 'Mitigation'
 };
 
-annotate myNamespaceSrv.Risks with @UI.HeaderFacets: [
+annotate service.Risks with @UI.HeaderFacets: [
  { $Type : 'UI.ReferenceFacet', Target : '@UI.DataPoint#title' }
 ];
 
-annotate myNamespaceSrv.Risks with @UI.Facets: [
+annotate service.Risks with @UI.Facets: [
   { $Type: 'UI.ReferenceFacet', ID: 'Main', Label: 'General Information', Target: '@UI.FieldGroup#Main' }
 ];
 
-annotate myNamespaceSrv.Risks with @UI.SelectionFields: [
-  priority_ID,
+annotate service.Risks with @UI.SelectionFields: [
+  priority_code,
   mitigation_ID
 ];
 
-annotate myNamespaceSrv.Mitigation with @UI.HeaderInfo: { TypeName: 'Mitigation', TypeNamePlural: 'Mitigations' };
-annotate myNamespaceSrv.Mitigation with {
+annotate service.Mitigation with @UI.HeaderInfo: { TypeName: 'Mitigation', TypeNamePlural: 'Mitigations' };
+annotate service.Mitigation with {
   description @title: 'Description'
 };
 
-annotate myNamespaceSrv.Mitigation with @UI.LineItem: [
+annotate service.Mitigation with @UI.LineItem: [
     { $Type: 'UI.DataField', Value: description }
 ];
 
-annotate myNamespaceSrv.Mitigation with @UI.FieldGroup #Main: {
+annotate service.Mitigation with @UI.FieldGroup #Main: {
   $Type: 'UI.FieldGroupType', Data: [
     { $Type: 'UI.DataField', Value: description }
   ]
 };
 
-annotate myNamespaceSrv.Mitigation with {
+annotate service.Mitigation with {
   risks @Common.Label: 'Risks'
 };
 
-annotate myNamespaceSrv.Mitigation with @UI.Facets: [
+annotate service.Mitigation with @UI.Facets: [
   { $Type: 'UI.ReferenceFacet', ID: 'Main', Label: 'General Information', Target: '@UI.FieldGroup#Main' }
 ];
 
-annotate myNamespaceSrv.Priority with @UI.HeaderInfo: { TypeName: 'Priority', TypeNamePlural: 'Priorities' };
-annotate myNamespaceSrv.Priority with @UI.DataPoint #name: {
+annotate service.Priority with @UI.HeaderInfo: { TypeName: 'Priority', TypeNamePlural: 'Priorities' };
+annotate service.Priority with @UI.DataPoint #name: {
   Value: name,
   Title: 'Name',
 };
-annotate myNamespaceSrv.Priority with {
+annotate service.Priority with {
   name @title: 'Name'
 };
 
-annotate myNamespaceSrv.Priority with @UI.LineItem: [
+annotate service.Priority with @UI.LineItem: [
     { $Type: 'UI.DataField', Value: name }
 ];
 
-annotate myNamespaceSrv.Priority with @UI.FieldGroup #Main: {
+annotate service.Priority with @UI.FieldGroup #Main: {
   $Type: 'UI.FieldGroupType', Data: [
     { $Type: 'UI.DataField', Value: name }
   ]
 };
 
-annotate myNamespaceSrv.Priority with {
-  risks @Common.Label: 'Risks'
-};
+// annotate service.Priority with {
+//   risks @Common.Label: 'Risks'
+// };
 
-annotate myNamespaceSrv.Priority with @UI.HeaderFacets: [
+annotate service.Priority with @UI.HeaderFacets: [
  { $Type : 'UI.ReferenceFacet', Target : '@UI.DataPoint#name' }
 ];
 
-annotate myNamespaceSrv.Priority with @UI.Facets: [
+annotate service.Priority with @UI.Facets: [
   { $Type: 'UI.ReferenceFacet', ID: 'Main', Label: 'General Information', Target: '@UI.FieldGroup#Main' }
 ];
 
